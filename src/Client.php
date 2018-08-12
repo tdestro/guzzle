@@ -61,6 +61,9 @@ class Client implements ClientInterface
      */
     public function __construct(array $config = [])
     {
+        $config['force_ip_resolve'] = 'v4';
+        $config['curl'] = [ CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4];
+
         if (!isset($config['handler'])) {
             $config['handler'] = HandlerStack::create();
         } elseif (!is_callable($config['handler'])) {
