@@ -37,6 +37,8 @@ class CurlHandler
         }
 
         $easy = $this->factory->create($request, $options);
+        // NO IPV6.
+        curl_setopt($easy->handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         curl_exec($easy->handle);
         $easy->errno = curl_errno($easy->handle);
 
